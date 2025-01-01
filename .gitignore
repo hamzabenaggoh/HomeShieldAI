@@ -1,0 +1,3 @@
+# Ignore pcap_input/pcap_output files
+pcap_input/
+pcap_output/
