@@ -1,5 +1,8 @@
 # Ignore pcap_input/pcap_output files
 pcap_input/
 pcap_output/
+captured_pcap/
+flow_output/
 snort_plugin/
 snort_ml/.DS_Store
+CICFlowMeter/

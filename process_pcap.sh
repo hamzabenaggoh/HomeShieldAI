@@ -1,24 +1,30 @@
 #!/bin/bash
 
-# Directory where the captured PCAP files are stored
-PCAP_DIR="/code/captured_pcap"
-OUTPUT_DIR="/code/flow_output"
-mkdir -p $OUTPUT_DIR
+# Ensure a PCAP file is passed as an argument
+if [ -z "$1" ]; then
+    echo "Error: No PCAP file provided."
+    exit 1
+fi
 
-# Path to the CICFlowMeter command or task
-CIC_FLOW_METER_CMD="gradle --no-daemon -Pcmdargs=$1 runcmd"
-
-# Process the PCAP file (input argument is the path to the PCAP file)
+# Assign the provided PCAP file to a variable
 PCAP_FILE="$1"
-if [ -f "$PCAP_FILE" ]; then
-    echo "Processing $PCAP_FILE with CICFlowMeter..."
+FLOW_DIR="/flow"
+mkdir -p $FLOW_DIR
 
-    # Run the CICFlowMeter task to generate flows from the PCAP file
-    $CIC_FLOW_METER_CMD
+# Ensure the PCAP file exists
+if [ ! -f "$PCAP_FILE" ]; then
+    echo "Error: PCAP file '$PCAP_FILE' does not exist."
+    exit 1
+fi
 
-    # Move the output flow CSV to the designated output folder
-    mv "$PCAP_FILE" "$OUTPUT_DIR/$(basename $PCAP_FILE).csv"
-    echo "Processed $PCAP_FILE into flow CSV"
+# Process the provided PCAP file with CICFlowMeter using Gradle
+echo "Processing provided PCAP file: $PCAP_FILE"
+gradle --no-daemon -Pcmdargs="$PCAP_FILE:$FLOW_DIR" runcmd
+
+# Check if Gradle task ran successfully
+if [ $? -eq 0 ]; then
+    echo "Successfully ran Gradle task with $PCAP_FILE"
 else
-    echo "PCAP file not found or invalid!"
+    echo "Error running Gradle task with $PCAP_FILE"
+    exit 1
 fi
