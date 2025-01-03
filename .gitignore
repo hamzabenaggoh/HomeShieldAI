@@ -1,3 +1,6 @@
 # Ignore pcap_input/pcap_output files
 pcap_input/
 pcap_output/
+research/
+snort_plugin/
+snort_ml/.DS_Store
