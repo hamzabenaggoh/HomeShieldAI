@@ -41,10 +41,25 @@ docker stop snort3
 
 ## Credits
 
-This project uses code for exploration purposes from the following repository:
+To install snortML as a docker container (was very helpful!):
 
-https://github.com/TnTech-CEROC/adversarial_ml_ids
+https://github.com/ettorecalvi/snortml2docker
 
+For the CICflowmeter as a docker container:
+
+https://github.com/hamelin/cicflowmeter-docker
+
+Using some code from Western-OC2-Lab for ML models:
+
+@ARTICLE{9443234,
+  author={Yang, Li and Moubayed, Abdallah and Shami, Abdallah},
+  journal={IEEE Internet of Things Journal}, 
+  title={MTH-IDS: A Multitiered Hybrid Intrusion Detection System for Internet of Vehicles}, 
+  year={2022},
+  volume={9},
+  number={1},
+  pages={616-632},
+  doi={10.1109/JIOT.2021.3084796}}
 
 
 ## Caviats
