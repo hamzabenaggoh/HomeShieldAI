@@ -1,4 +1,5 @@
 import warnings
+import sys
 warnings.filterwarnings("ignore")
 import numpy as np
 import pandas as pd
@@ -14,17 +15,31 @@ import xgboost as xgb
 from xgboost import plot_importance
 from joblib import load
 
-# Get model
-rf = load('./model/models/clf_rf.joblib')
+# Ensure a CSV file argument is provided
+if len(sys.argv) != 2:
+    print("Usage: python script.py <csv_file>")
+    sys.exit(1)
 
-#Read dataset
-df = pd.read_csv("../pcap_output/testing2.pcap_Flow.csv")
+csv_file = sys.argv[1]
+
+
+# Get model
+rf = load('/Users/hamzabenaggoun/Desktop/HomeShieldAI/snort_ml/model/models/clf_rf.joblib')
+
+# Read dataset
+# df = pd.read_csv("../pcap_output/testing2.pcap_Flow.csv")
+
+try:
+    df = pd.read_csv(csv_file)
+except Exception as e:
+    print(f"Error reading the CSV file: {e}")
+    sys.exit(1)
 
 #Get selected features
-selected_features = load('./model/features/selected_features.joblib')
+selected_features = load('/Users/hamzabenaggoun/Desktop/HomeShieldAI/snort_ml/model/features/selected_features.joblib')
 
 # Get the scaler
-scaler = load('./model/scalers/scaler.joblib')
+scaler = load('/Users/hamzabenaggoun/Desktop/HomeShieldAI/snort_ml/model/scalers/scaler.joblib')
 
 #Get training features
 # training_features = load('../model/features/training_features.joblib')
