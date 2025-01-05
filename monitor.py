@@ -22,7 +22,7 @@ class Watcher:
     def run_predict_script(self, file_path):
         time.sleep(2)
         try:
-            script_path = "/Users/hamzabenaggoun/Desktop/HomeShieldAI/snort_ml/predict.py"
+            script_path = "/Users/hamzabenaggoun/Desktop/HomeShieldAI/anomaly_detection/predict.py"
             print(f"Running prediction on {file_path}")
             subprocess.run(["python", script_path, file_path], check=True)
         except subprocess.CalledProcessError as e:

@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+
+  # Snort application
+  snort:
+    build: ./snort_config
+    platform: linux/amd64
+    container_name: snort
+    # volumes:
+    #   - ./snort_config/snort.conf:/usr/local/etc/snort/snort.conf
+    #   - ./snort_config/rules:/usr/local/etc/snort/rules
+    # ports:
+    #   - "3000:3000" # Example port mapping if needed for other services
+    stdin_open: true # Keep the container open
+    tty: true        # Allocate a pseudo-TTY for the container
+    command: /bin/bash
+
+
+  # React-redux ui
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000" # Mapping the container's port 3000 to your host machine
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./frontend/src:/frontend/src # Optional: Map your local src directory to allow live updates during development
+    command: npm run dev # Run the development server, change this if you want to run the production build
+
+
+
+
+
+# version: '3.9'
+
+# services:
+#   snort:
+#     image: latest
+#     container_name: snort
+#     volumes:
+#       - ./snort_config/snort.conf:/usr/local/etc/snort/snort.conf
+#       - ./snort_config/rules:/usr/local/etc/snort/rules
+#     # ports:
+#     #   - "3000:3000" # Example port mapping if needed for other services
+#     command: >
+#       /usr/local/bin/snort -c /usr/local/etc/snort/snort.conf -i eth0

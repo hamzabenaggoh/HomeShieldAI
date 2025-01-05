@@ -4,5 +4,12 @@ pcap_output/
 captured_pcap/
 flow_output/
 snort_plugin/
-snort_ml/.DS_Store
+anomaly_detection/.DS_Store
 CICFlowMeter/
+node_modules/
+/anomaly_detection/model/data
+anomaly_detection/model/features/selected_features.joblib
+anomaly_detection/model/features/training_features.joblib
+anomaly_detection/model/models/clf_rf.joblib
+anomaly_detection/model/scalers/scaler.joblib
+frontend/package-lock.json
